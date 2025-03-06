@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "./Image";
 import logo from "../assets/logo.png";
 import search from "../assets/search_icon.png";
@@ -8,12 +8,14 @@ import menuIcon from "../assets/menu_icon.png";
 import dropdownIcon from "../assets/dropdown_icon.png";
 import { NavLink } from "react-router";
 import { Link } from "react-router-dom";
+import { ShopeContext } from "../context/ShopeContext";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
+  const { setShowSearch } = useContext(ShopeContext);
   return (
     <div className="flex items-center justify-between py-5 font-medium">
-      <Link to={'/'}>
+      <Link to={"/"}>
         <Image className={"w-36"} imgSrc={logo} imgAlt={logo} />
       </Link>
       <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
@@ -38,11 +40,13 @@ const Navbar = () => {
         </NavLink>
       </ul>
       <div className="flex items-center gap-6">
-        <Image
-          className={"w-5 cursor-pointer"}
-          imgSrc={search}
-          imgAlt={search}
-        />
+        <div onClick={() => setShowSearch(true)} className="">
+          <Image
+            className={"w-5 cursor-pointer"}
+            imgSrc={search}
+            imgAlt={search}
+          />
+        </div>
         <div className="group relative">
           <Image
             className={"w-5 cursor-pointer"}
